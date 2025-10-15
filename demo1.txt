@@ -1,0 +1,276 @@
+-----Find out total employees in 2021 and total salary in 2022----
+select to_char(emp_doj,'yyyy'),count(emp_id)
+from emps
+where to_char(emp_doj,'yyyy') = ('2021')
+group by to_char(emp_doj,'yyyy')
+union
+select to_char(emp_doj,'yyyy'),sum(emp_sal)
+from emps
+where to_char(emp_doj,'yyyy') = ('2022')
+group by to_char(emp_doj,'yyyy')
+
+------union----unique records
+select * from team_36
+union
+select * from team_35
+
+---------unionall----unique records
+select * from team_36
+union all
+select * from team_35
+
+---Intersect---
+select * from team_36
+intersect
+select * from team_35
+
+--Minus---
+select * from team_36
+minus
+select * from team_35
+
+
+select * from team_35
+minus
+select * from team_36
+
+------------Case-----------conditional statement---
+select dept_name,count(emp_id),(case when count(emp_id) > 4 then 'Level 1 dept'
+                                    when count(emp_id) >= 3 then 'Level 2 dept'
+                                    else 'Level 3 dept' end) as emp_status
+from department d inner join emps e
+on d.dept_id = e.dept_id
+group by dept_name
+
+
+---Dept_wise gender count---
+select dept_name,gender,count(emp_id)
+from department d inner join emps e
+on d.dept_id = e.dept_id
+group by dept_name,gender
+
+select dept_name,count(emp_id)
+from department d inner join emps e
+on d.dept_id = e.dept_id
+where gender = 'M'
+group by dept_name
+union
+select dept_name,count(emp_id)
+from department d inner join emps e
+on d.dept_id = e.dept_id
+where gender = 'F'
+group by dept_name
+
+
+select dept_name,sum(case when gender = 'M' then 1 else 0 end) male,sum(case when gender = 'F' then 1 else 0 end) Female
+from department d inner join emps e
+on d.dept_id = e.dept_id
+group by dept_name
+
+
+select p_name,p_price,(case when p_price > 100000 then 'High' when  p_price > 50000 then 'Average' else 'Low' end) as product_status
+from product
+
+select * from jobs
+
+select dept_name,sum(case when job_role = 'SoftwareEngineer' then 1 else 0 end) as SoftwareEngineer,
+sum(case when job_role = 'SJ operation' then 1 else 0 end) as SJOperations
+from department d inner join emps e on
+d.dept_id = e.dept_id inner join jobs j
+on e.job_id = j.job_id
+group by dept_name
+
+
+
+1	DISPLAY THE STATE NAME & STATUS. IF CITY COUNT IS GREATER THAN 3 THEN STATUS AS LEVEL 1 , 
+	--    IF CITY COUNT IS GREATER THAN 2 THEN STATUS AS LEVEL 2 ELSE LEVEL 0
+2	DISPLAY THE STATE NAME & STATUS. IF STATE POPULATION IS GREATER THAN 300000 THEN STATUS AS PRIORITY 1 , 
+	--    IF STATE POPULATION IS GREATER THAN 200000 THEN STATUS AS PRIORITY 2 ELSE PRIORITY 0
+
+
+-----Find out total employees in 2021 and total salary in 2022----
+select to_char(emp_doj,'yyyy'),count(emp_id)
+from emps
+where to_char(emp_doj,'yyyy') = ('2021')
+group by to_char(emp_doj,'yyyy')
+union
+select to_char(emp_doj,'yyyy'),sum(emp_sal)
+from emps
+where to_char(emp_doj,'yyyy') = ('2022')
+group by to_char(emp_doj,'yyyy')
+
+------union----unique records
+select * from team_36
+union
+select * from team_35
+
+---------unionall----unique records
+select * from team_36
+union all
+select * from team_35
+
+---Intersect---
+select * from team_36
+intersect
+select * from team_35
+
+--Minus--
+select * from team_36
+minus
+select * from team_35
+
+
+select * from team_35
+minus
+select * from team_36
+
+------------Case-----------conditional statement---
+select dept_name,count(emp_id),(case when count(emp_id) > 4 then 'Level 1 dept'
+                                    when count(emp_id) >= 3 then 'Level 2 dept'
+                                    else 'Level 3 dept' end) as emp_status
+from department d inner join emps e
+on d.dept_id = e.dept_id
+group by dept_name
+
+
+---Dept_wise gender count---
+select dept_name,gender,count(emp_id)
+from department d inner join emps e
+on d.dept_id = e.dept_id
+group by dept_name,gender
+
+select dept_name,count(emp_id)
+from department d inner join emps e
+on d.dept_id = e.dept_id
+where gender = 'M'
+group by dept_name
+union
+select dept_name,count(emp_id)
+from department d inner join emps e
+on d.dept_id = e.dept_id
+where gender = 'F'
+group by dept_name
+
+
+select dept_name,sum(case when gender = 'M' then 1 else 0 end) male,sum(case when gender = 'F' then 1 else 0 end) Female
+from department d inner join emps e
+on d.dept_id = e.dept_id
+group by dept_name
+
+
+select p_name,p_price,(case when p_price > 100000 then 'High' when  p_price > 50000 then 'Average' else 'Low' end) as product_status
+from product
+
+select * from jobs
+
+select dept_name,sum(case when job_role = 'SoftwareEngineer' then 1 else 0 end) as SoftwareEngineer,
+sum(case when job_role = 'SJ operation' then 1 else 0 end) as SJOperations
+from department d inner join emps e on
+d.dept_id = e.dept_id inner join jobs j
+on e.job_id = j.job_id
+group by dept_name
+commit
+select * from resort
+create table country1 as select * from team9_shobha.country1
+create table resort as select * from team9_shobha.resort
+create table customer2 as select * from team9_shobha.customer2
+
+select * from country1
+select * from state
+select * from city
+Alter table city add state_id number(10) forigen key;
+update city set state_id = 1 where city_id = 10
+update city set state_id = 0 where city_id = 20
+update city set state_id = 2 where city_id = 30
+insert into city values (40,'Mysore',1234992,1)
+create table city2 (city_id number(3) primary key,city_name varchar(20),city_population number(10),state_id number(3))
+select * from city2
+insert into city2 values(11,'Bangalore',12765000,1)
+insert into city2 values(22,'Mysore',1234992,1)
+insert into city2 values(33,'Pune',3891823,2)
+insert into city2 values(44,'Mumbai',20667656,2)
+insert into city2 values(55,'Surat',7489742,3)
+insert into city2 values(66,'Hubli',1136923,1)
+insert into city2 values(77,'Nagpur',1234992,2)
+truncate table city2
+create table customer5(cust_id number(5)primary key,cust_name varchar(15),phone number(10),country_id number(3))
+insert into customer5 values(1001,'Tim Downey',123456789,1)
+insert into customer5 values(1002,'Ramesh K',596869689,2)
+insert into customer5 values(1003,'Bill Price',74849498,1)
+insert into customer5 values(1004,'Malinga',83733938,3)
+insert into customer5 values(1005,'Farooq',8958498,4)
+select * from country1
+select * from resort
+
+select * from customer5
+create table country4 (country_id number(10) primary key,country_name varchar(15))
+insert into country4 values(1,'us')
+insert into country4 values(2,'india')
+insert into country4 values(3,'srilank')
+insert into country4 values(4,'maldives')
+
+create table resort1(resort_id number(3) primary key,resort_name varchar(18),country_id number(3))
+insert into resort1 values(50,'beach front',4)
+insert into resort1 values(51,'oberai goa',2)
+insert into resort1 values(52,'taj maldives',4)
+insert into resort1 values(53,'taj chennai',2)
+select * from country4
+select * from resort1
+select * from customer5
+---1.Query to find out country wise resort count.
+select country_name,count(resort_id)as resort_count from country4 c inner join resort1 r on 
+c.country_id = r.country_id 
+group by country_name
+
+
+
+---2.Query to display country wise customer count.
+select country_name,count(cust_id) from  country4 c inner join customer5 r on 
+c.country_id = r.country_id 
+group by country_name
+---3.	Display countries in which we don’t have any resorts
+select * from country4 c left join resort1 r on 
+c.country_id = r.country_id where resort_id is null
+select country_name from country4 where country_id not in (select country_id from resort1)
+---4.	Display countries in which we have minimum of 100 customes.
+---5.	Display how many resorts we have in the country where resort ‘Beach front’ is
+select count(resort_id)as res_count_status from country4 c inner join resort1 r on 
+c.country_id = r.country_id where resort_name = 
+--6.	Display customers whose name starts with F or R and who are either from India or Srilanka.
+select cust_name from customer5 where cust_name like 'F%' or cust_name like 'R%'
+and country_id in 
+(select country_id from country4 where country_name in ('India','Srilank')
+---7.	Display customer names who are from US and do not have any phone numbers.
+select cust_name from customer5 where phone is null and country_id in 
+(select country_id from country4 where country_name = 'US')
+
+---8.	Display Country name, resort name. Display all the countries in the list whether we have resorts or not.
+select country_name,resort_name 
+---9.	Display country wise resort count as level 1,2,3 Level 1 ->=2 resort
+Level2 >=1 resort
+Leve3 = 0
+select country_name, count(resort_id),(case when count(resort_id) >= 2 then 'Level 1country '
+                                    when count(resort_id) >= 1 then 'Level 2 country'
+                                    else 'Level 3 country' end) as country_status)
+ from country4 c inner join resort1 r on 
+c.country_id = r.country_id 
+group by country_name                                   
+                                    
+---10.Display resort name belongs to US and INDIA
+select resort_name from country4 c inner join resort1 r on 
+c.country_id = r.country_id where country_name in ('us','india')
+
+commit
+
+1	DISPLAY THE STATE NAME & STATUS. IF CITY COUNT IS GREATER THAN 3 THEN STATUS AS LEVEL 1 , 
+	--    IF CITY COUNT IS GREATER THAN 2 THEN STATUS AS LEVEL 2 ELSE LEVEL 0
+    
+2	DISPLAY THE STATE NAME & STATUS. IF STATE POPULATION IS GREATER THAN 300000 THEN STATUS AS PRIORITY 1 , 
+	--    IF STATE POPULATION IS GREATER THAN 200000 THEN STATUS AS PRIORITY 2 ELSE PRIORITY 0
+
+select * from city4
+commit
+
+
+
+
